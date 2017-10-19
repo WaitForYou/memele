@@ -1,0 +1,22 @@
+<!--index.wxml-->
+<view class="container" style="background-image:url(paynew/drawable-xxhdpi/bg_anci.png);">
+  <view class="userpay" wx:if="{{payWayData == 0}}">
+    <button id="numPay" class="payBtn numPayBtn" bindtap="payWay">按次支付（1元/2次)</button>
+    <button id="timePay" class="payBtn" bindtap="payWay">按时支付（15元/时)</button>
+  </view>
+
+  <view class="ad" style="background-image:url(paynew/drawable-xxhdpi/icon.png);">
+    <text class="title">么么乐</text>
+    <text class="propagation">约局送红包 福利大放送</text>
+    <button class="downloadBtn" bindDownload="downloadBtn">立即下载</button>
+  </view>
+
+  <view id="numPayView" class="chooseView" wx:if="{{payWayData == 1}}"> 
+    <button class="chooseBtn choseBtn" wx:for="{{numItem}}" wx:for-index="index" wx:for-item="item">
+      <text>{{item}}次</text>
+    </button>
+  </view>
+  <view id="timePayView" class="chooseView" wx:if="{{payWayData == 2}}">
+    <button class="chooseBtn" wx:for="{{timeItem}}" wx:for-index="index" wx:for-item="item">{{item}}时</button>
+  </view>
+</view>
