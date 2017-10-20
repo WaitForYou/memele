@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<view class="container" style="background-image:url(paynew/drawable-xxhdpi/bg_anci.png);">
+<view class="container" style="background-image:url(paynew/drawable-xxhdpi/{{payWayData}}.png);">
   <view class="userpay" wx:if="{{payWayData == 0}}">
     <button id="numPay" class="payBtn numPayBtn" bindtap="payWay">按次支付（1元/2次)</button>
     <button id="timePay" class="payBtn" bindtap="payWay">按时支付（15元/时)</button>
@@ -12,11 +12,30 @@
   </view>
 
   <view id="numPayView" class="chooseView" wx:if="{{payWayData == 1}}"> 
-    <button class="chooseBtn choseBtn" wx:for="{{numItem}}" wx:for-index="index" wx:for-item="item">
-      <text>{{item}}次</text>
+    <button wx:for="{{numItem}}" bindtap="chooseFn" wx:for-index="index" wx:for-item="item"  class="chooseBtn" class="{{(item == hlNumValue)?'chooseBtn choseBtn':'chooseBtn'}}" data-chose-result="{{item}}" style="background-image:url(paynew/drawable-xxhdpi/button_choose_{{(item == hlNumValue)?'selected3':'default'}}.png);">
+      {{item}}次
     </button>
+    <view class="section">
+      <input class="numInput" text type="number" bindinput="bindKeyInput" value="{{inputValue}}" placeholder="输入购买次数" />
+      <button class=" payNowBtn" bindtap="payMoneyNowFn" style="background-image:url(paynew/drawable-xxhdpi/button_choose_default.png);">立即支付</button>
+    </view>
   </view>
   <view id="timePayView" class="chooseView" wx:if="{{payWayData == 2}}">
-    <button class="chooseBtn" wx:for="{{timeItem}}" wx:for-index="index" wx:for-item="item">{{item}}时</button>
+    <button wx:for="{{timeItem}}" bindtap="chooseFn" wx:for-index="index" wx:for-item="item"  class="chooseBtn" class="{{(item == hlTimeValue)?'chooseBtn choseBtn':'chooseBtn'}}" data-chose-result="{{item}}" style="background-image:url(paynew/drawable-xxhdpi/button_choose_{{(item == hlTimeValue)?'selected3':'default'}}.png);" >
+      {{item}}时
+    </button>
+    <view class="section">
+      <input class="numInput" text type="number" bindinput="bindKeyInput" value="{{inputValue}}"  placeholder="输入购买次数" />
+      <button class=" payNowBtn" bindtap="payMoneyNowFn" style="background-image:url(paynew/drawable-xxhdpi/button_choose_default.png);">立即支付</button>
+    </view>
+  </view>
+
+  <view class="cover" wx:if="{{payStage == 1 || payStage == 2}}">
+  </view>
+  <view wx:if="{{payStage == 1 || payStage == 2}}" class="payState" style="background-image:url(paynew/drawable-xxhdpi/zf{{payStage}}_bg.png);">
+    <text class="stateTitle">{{(payStage == 1) ? '支付成功': '支付失败'}}</text>
+    <text class="stateReason">您已取消支付</text>
+    <button class="backToHome" bindtap="backToHomePageFn">回首页</button>
+    <button class="closeTips" bindtap="closeTipsFn" style="background-image:url(paynew/drawable-xxhdpi/zfjg_icon_close.png);"></button>
   </view>
 </view>

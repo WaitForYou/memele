@@ -9,7 +9,7 @@
 	"compileType": "weapp",
 	"libVersion": "1.6.0",
 	"appid": "wxaf44866717d7be7b",
-	"projectname": "firstProject",
+	"projectname": "memele",
 	"condition": {
 		"weapp": {
 			"current": -1,
